@@ -8,6 +8,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
 use App\Models\User;
 use Illuminate\Pagination\Paginator;
+use Auth;
 
 class Controller extends BaseController
 {
@@ -19,5 +20,11 @@ class Controller extends BaseController
         Paginator::useBootstrap();
         $users = User::withCount('articles')->paginate(5);
         return view('welcome',compact('users'));
+    }
+
+    public function userLogout(){
+        Auth::logout();
+        session()->flash('message', 'Başarıyla çıkış Yapıldı.');
+        return redirect()->route('welcome');
     }
 }

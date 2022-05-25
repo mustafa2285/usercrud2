@@ -47,7 +47,7 @@
 
                 if(e.detail.status){
                     setTimeout(function () {
-                        window.location.href = '{{route('users.index')}}';
+                        window.location.href = '{{route('welcome')}}';
                     },1000);
                 }
             })

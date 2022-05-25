@@ -11,14 +11,45 @@
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
   </head>
   <body>
-    <div class="container">
-        
-        @auth
-        <a type="submit"class="my-4 btn btn-light btn-sm w-100" href="{{route('users.index')}}"><h5>Anasayfa</h5></a>
-        @else
-        <a type="submit"class="mt-4 btn btn-light btn-sm w-100" href="{{route('login')}}"><h5>Giriş yap</h5></a>
-        @endauth
-        <div class="card">
+<!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand  ms-5" href="#">@auth {{ auth()->user()->name }} @else Anasayfa @endauth</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_icerik" >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbar_icerik">
+                @auth
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{{route('users.article')}}">Makalelerim</a>
+                    </li>
+                    @if(auth()->user()->type == 'admin')
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{route('users.index')}}">Admin</a>
+                        </li>
+                    @endif
+                </ul>
+                <ul class="navbar-nav ms-auto me-5">
+                    <li class="nav-item">
+                        <a  href="{{route('userLogout')}}" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"> Çıkış</i>
+                        </a>
+                    </li>
+                </ul>
+                @else
+                <ul class="navbar-nav ms-auto me-5">
+                    <li class="nav-item">
+                        <a href="{{route('login')}}" class="nav-link">
+                            <i class="nav-icon fas fa-sign-out-alt"> giriş</i>
+                        </a>
+                    </li>
+                </ul>
+                @endauth
+            </div>
+        </nav>
+        <!-- /.navbar -->
+    <div class="container mt-4">
          @foreach($users as $user)
             <div class="row py-3 mb-4 bg-secondary text-white rounded"  x-data="{ open{{ $loop->iteration }}: false }">
                 <div class="col-11 ps-4 "><h4>{{ $user->name }} Kulanıcısına Ait Makaleler</h4> </div>
@@ -72,7 +103,6 @@
                 </div>
             @endforeach
                     {{ $users->links() }}
-            </div>
         </div>  
     <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
