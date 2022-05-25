@@ -41,7 +41,7 @@
                 <ul class="navbar-nav ms-auto me-5">
                     <li class="nav-item">
                         <a href="{{route('login')}}" class="nav-link">
-                            <i class="nav-icon fas fa-sign-out-alt"> giriş</i>
+                            <i class="nav-icon fas fa-sign-in-alt"> * Giriş *</i>
                         </a>
                     </li>
                 </ul>
