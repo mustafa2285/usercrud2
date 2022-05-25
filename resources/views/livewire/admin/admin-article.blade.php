@@ -58,7 +58,7 @@
                               @endif
                           </td>
                           <td>
-                            <a wire:click.prevent="getArticle({{$article->id}})" href="#" class="text-primary" data-toggle="modal" data-target="#modal-edit"><i class="fa fa-edit"></i></a>
+                            <a wire:click="getArticle({{$article->id}})" href="#" class="text-primary" data-toggle="modal" data-target="#modal-edit"><i class="fa fa-edit"></i></a>
                             ---
                             <a wire:click="getArticle2({{$article->id}})"  href="#" class="text-danger " data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash-alt"></i></a>
                           </td>
