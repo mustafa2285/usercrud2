@@ -19,18 +19,12 @@
 <div class="wrapper">
 
   
-  			
-
-
-
-
 
   <!-- Content Wrapper. Contains page content -->
   @livewire('user.user-article')
   <!-- /.content-wrapper -->
 
   
-
   
 </div>
 <!-- ./wrapper -->
