@@ -1,3 +1,4 @@
+<div>
 <!-- container -->
       <div class="container">
             <div>
@@ -190,3 +191,4 @@
           });
         </script>
       @endsection
+</div>

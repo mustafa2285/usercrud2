@@ -79,7 +79,7 @@ class UserArticle extends Component
             $name = $this->image->store('img', 'public');
             $articles->image = $name;
         }
-        $user->save();
+        $articles->save();
         $this->reset();
         $this->emit('update-user');
 

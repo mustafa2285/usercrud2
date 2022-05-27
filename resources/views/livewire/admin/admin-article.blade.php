@@ -33,14 +33,12 @@
                     <table class="table table-bordered">
                       <thead>
                         <tr>
-                          <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Yazar id</th>
-                                <th scope="col">Başlık</th>
-                                <th scope="col">Makale</th>
-                                <th scope="col">Fotoğraf</th>
-                                <th scope="col">İşlemler</th>
-                            </tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Yazar id</th>
+                          <th scope="col">Başlık</th>
+                          <th scope="col">Makale</th>
+                          <th scope="col">Fotoğraf</th>
+                          <th scope="col">İşlemler</th>
                         </tr>
                       </thead>
                       <tbody>
