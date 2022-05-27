@@ -76,7 +76,7 @@ class UserArticle extends Component
         $articles->title = $this->title;
         $articles->article = $this->article;
         if (!empty($this->image)){
-            $name = $this->image->store('photos', 'public');
+            $name = $this->image->store('img', 'public');
             $articles->image = $name;
         }
         $user->save();
