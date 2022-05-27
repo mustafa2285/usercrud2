@@ -37,7 +37,7 @@ class UsersIndex extends Component
     }
 
     public function newUser(){
-        $this->validate();
+        $this->validate(['email' => 'required|min:2|email:rfc,dns|unique:users']);
 
         $new = new User();
         $new->name = $this->name;

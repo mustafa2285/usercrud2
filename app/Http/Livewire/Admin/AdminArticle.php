@@ -52,7 +52,7 @@ class AdminArticle extends Component
         $new->article = $this->article;
 
         if (!empty($this->image)){
-            $name = $this->image->store('photos', 'public');
+            $name = $this->image->store('img', 'public');
             $new->image = $name;
         }
         
@@ -83,7 +83,7 @@ class AdminArticle extends Component
             $name = $this->image->store('photos', 'public');
             $articles->image = $name;
         }
-        $user->save();
+        $articles->save();
         $this->reset();
         $this->emit('update-user');
 

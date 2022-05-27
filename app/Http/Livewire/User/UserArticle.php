@@ -50,7 +50,7 @@ class UserArticle extends Component
         $new->article = $this->article;
 
         if (!empty($this->image)){
-            $name = $this->image->store('photos', 'public');
+            $name = $this->image->store('img', 'public');
             $new->image = $name;
         }
         
@@ -99,12 +99,6 @@ class UserArticle extends Component
 
         session()->flash('message', 'Makale Silindi');
         
-    }
-
-    public function userLogout(){
-        Auth::logout();
-        session()->flash('message', 'Başarıyla çıkış Yapıldı.');
-        return redirect()->route('welcome');
     }
     
 }

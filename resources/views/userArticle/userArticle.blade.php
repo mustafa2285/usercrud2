@@ -18,6 +18,9 @@
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
 
+   <!-- Navbar -->
+    @livewire('user.user-navbar')
+    <!-- /.navbar -->
   
 
   <!-- Content Wrapper. Contains page content -->

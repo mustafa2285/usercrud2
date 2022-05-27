@@ -122,11 +122,9 @@
                   </div>
                   </div>
                   <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
-                  <button type="submit" class="btn btn-success">Makale Oluştur</button>
-                </div>
-                </div>
-                
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                    <button type="submit" class="btn btn-success">Makale Oluştur</button>
+                  </div>
               </form>
           </div>
           <!-- /.modal-content -->
@@ -175,11 +173,9 @@
                   </div>
                   </div>
                   <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
-                  <button type="submit" class="btn btn-success">Makale Güncelle</button>
-                </div>
-                </div>
-                
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                    <button type="submit" class="btn btn-success">Makale Güncelle</button>
+                  </div>
               </form>
           </div>
           <!-- /.modal-content -->
