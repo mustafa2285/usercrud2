@@ -35,7 +35,6 @@ class UserArticle extends Component
         
     public function render()
     {
-        Paginator::useBootstrap();
 
         $articles = Article::whereUser_id(Auth::user()->id)->paginate(5);	
         return view('livewire.user.user-article', compact('articles'));

@@ -27,7 +27,7 @@ Route::get('/', function () {
 Route::get('/login',[AuthController::class, 'login'])->name('login');
 
 Route::middleware('auth')->prefix('user')->group(function (){
-    Route::get('/', [UserArticles::class, 'article'])->name('users.article');
+    Route::get('/article', [UserArticles::class, 'article'])->name('users.article');
 });
 
 Route::group(['middleware' => ['auth','IsAdmin'],'prefix'=>'admin'], function () {
