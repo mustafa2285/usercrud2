@@ -29,7 +29,7 @@
                   </div>
                   </div>
                   <!-- /.card-header -->
-                  <div class="card-body">
+                  <div class="card-body table-responsive">
                     <table class="table table-bordered">
                       <thead>
                         <tr>
@@ -51,7 +51,8 @@
                           <td>{{$user->created_at}}</td>
                           <td>
                             <a wire:click="getUser({{$user->id}})" href="#" class="text-primary" data-toggle="modal" data-target="#modal-edit"><i class="fa fa-edit"></i></a>
-                            <a wire:click="getUser2({{$user->id}})"  href="#" class="text-danger p-4" data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash-alt"></i></a>
+                            ---
+                            <a wire:click="getUser2({{$user->id}})"  href="#" class="text-danger" data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash-alt"></i></a>
                           </td>
                         </tr>
                         @endforeach

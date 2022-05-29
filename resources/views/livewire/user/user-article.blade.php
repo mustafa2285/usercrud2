@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
+                        <div class="card-body table-responsive">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -41,7 +41,7 @@
                                     <td>
                                         @if($article->image )
                                             <a href="{{ asset(\Illuminate\Support\Facades\Storage::url($article->image)) }}" target="_blank">
-                                                <img src="{{ asset(\Illuminate\Support\Facades\Storage::url($article->image)) }}" class="w-50 rounded-pill">
+                                              <img src="{{ asset(\Illuminate\Support\Facades\Storage::url($article->image)) }}" class="w-50 rounded-pill">
                                             </a>
                                         @endif
                                     </td>
