@@ -3,11 +3,10 @@
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
-        </div>
         <div class="info">
-          <a href="#" class="d-block"> @if (Auth::check()) {{Auth::user()->name}} @endif</a>
+          <a href="{{route('welcome')}}" class="d-block">
+            <i class="fas fa-user-tie fa-3x"></i> - @if (Auth::check()) {{Auth::user()->name}} @endif
+          </a>
         </div>
       </div>
 
@@ -15,6 +14,14 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <li class="nav-item menu-open">
+          <li class="nav-item">
+            <a href="{{route('welcome')}}" class="nav-link">
+              <i class="nav-icon fas fa-home"></i>
+              <p>
+                Anasayfa
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="{{route('users.index')}}" class="nav-link">
               <i class="nav-icon fas fa-users"></i>
@@ -38,6 +45,7 @@
                 Çıkış
               </p>
             </a>
+          </li>
           </li>
         </ul>
       </nav>
