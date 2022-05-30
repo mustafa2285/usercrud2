@@ -34,7 +34,7 @@
                       <thead>
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">Yazar id</th>
+                          <th scope="col">Yazar</th>
                           <th scope="col">Başlık</th>
                           <th scope="col">Makale</th>
                           <th scope="col">Fotoğraf</th>
@@ -45,7 +45,7 @@
                         @foreach($articles as $article)
                         <tr>
                           <td >{{ $loop->iteration }}</td>
-                          <td>{{ $article->user_id }}</td>
+                          <td>{{ $users[$article->user_id -1]->name  }}</td>
                           <td>{{ $article->title }}</td>
                           <td >{{mb_strimwidth( $article->article , 0, 50, "...")}}</td>
                           <td>
@@ -90,10 +90,15 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <div class="mb-3">
-                      <label for="IpputUser_id" class="form-label">Kullanıcı id</label>
-                      <input wire:model="user_id" type="int" class="form-control" id="IpputUser_id">
-                      @error('user_id')
+                  <div class="input-group mb-3">
+                    <label for="IpputUser_id" class="input-group-text">YAZAR</label>
+                    <select wire:model="name" class="form-select"  id="IpputUser_id">
+                      <option selected>Seç</option>
+                      @foreach($users as $article)
+                      <option value="{{ $loop->iteration }}">{{$article->name}}</option>
+                      @endforeach
+                    </select>
+                      @error('name')
                       <div class="text-danger">{{$message}}</div>
                       @enderror
                   </div>
@@ -141,10 +146,15 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <div class="mb-3">
-                      <label for="IpputUser_id" class="form-label">Kullanıcı id</label>
-                      <input wire:model="user_id" type="int" class="form-control" id="IpputUser_id">
-                      @error('user_id')
+                  <div class="input-group mb-3">
+                    <label for="IpputUser_id" class="input-group-text">YAZAR</label>
+                    <select wire:model="name" class="form-select"  id="IpputUser_id">
+                      <option selected>Seç</option>
+                      @foreach($users as $article)
+                      <option value="{{ $loop->iteration }}">{{$article->name}}</option>
+                      @endforeach
+                    </select>
+                      @error('name')
                       <div class="text-danger">{{$message}}</div>
                       @enderror
                   </div>

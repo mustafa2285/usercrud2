@@ -17,14 +17,14 @@ class AdminArticle extends Component
 
     public $title_search;
 
-    public $user_id;
+    public $name;
     public $article_id;
     public $title;
     public $article;
     public $image;
 
     public $rules = [
-        'user_id' => 'required|max:2',
+        'name' => 'required',
         'title' => 'required|min:1',
         'article' => 'required|min:200',
         'image' => 'image|nullable|mimes:jpg,jpeg,png',
@@ -35,19 +35,18 @@ class AdminArticle extends Component
 
     public function render()
     {
+        $users = User::all();
         $articles = Article::when($this->title_search, function($query, $search){
             return $query->where('title', 'LIKE',"%$search%");
         })->paginate(5);
-        return view('livewire.admin.admin-article', compact('articles'));
+        return view('livewire.admin.admin-article', compact('articles','users'));
     }
 
     public function newArticle(){
          $this->validate();
 
-        
-
         $new = new Article();
-        $new->user_id = $this->user_id;
+        $new->user_id = User::find($this->name)->id;
         $new->title = $this->title;
         $new->article = $this->article;
 
@@ -66,7 +65,6 @@ class AdminArticle extends Component
     }
 
     public function getArticle(Article $articles){
-        $this->user_id = $articles->user_id;
         $this->title = $articles->title;
         $this->article = $articles->article;
         $this->article_id = $articles->id;
@@ -76,7 +74,7 @@ class AdminArticle extends Component
         $this->validate();
 
         $articles = Article::where('id',$this->article_id)->first();
-        $articles->user_id = $this->user_id;
+        $articles->user_id = User::find($this->name)->id;
         $articles->title = $this->title;
         $articles->article = $this->article;
         if (!empty($this->image)){
