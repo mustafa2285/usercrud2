@@ -114,7 +114,7 @@
               <form wire:submit.prevent="updateArticle">
                 <div class="modal-header">
                   <h4 class="modal-title">Makale Düzenle ({{$title}})</h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <button wire:click.prevent="clear()" type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
                 </div>
@@ -126,9 +126,9 @@
                       <div class="text-danger">{{$message}}</div>
                       @enderror
                   </div>
-                  <div class="mb-3">
-                      <label for="IpputArticle" class="form-label">Makale</label>
-                      <textarea wire:model.defer="article" class="form-control" id="IpputArticle"></textarea>
+                  <div wire:ignore class="mb-3">
+                      <label for="IpputArticleUpdate" class="form-label">Makale</label>
+                      <textarea class="form-control" id="IpputArticleUpdate"></textarea>
                       @error('article')
                       <div class="text-danger">{{$message}}</div>
                       @enderror
@@ -143,7 +143,7 @@
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
-                    <button type="submit" class="btn btn-success">Makale Güncelle</button>
+                    <button type="submit" class="btn btn-success" id="m">Makale Güncelle</button>
                   </div>
               </form>
           </div>
@@ -177,13 +177,22 @@
       </div>
       <!-- /.modal -->
       @section('foot')
-      <script src="https://cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
+      <script src="https://cdn.ckeditor.com/4.16.1/basic/ckeditor.js"></script>
 
       <script>
         $(document).ready(function () {
               const editor = CKEDITOR.replace('IpputArticle');
               editor.on('change', function(event){
                   console.log(event.editor.getData())
+                  @this.set('article', event.editor.getData());
+              })
+
+            })
+        $(document).ready(function () {
+              const editor = CKEDITOR.replace('IpputArticleUpdate');
+              editor.on('change', function(event){
+                  console.log(event.editor.getData())
+                  @this.get('article', event.editor.getData());
                   @this.set('article', event.editor.getData());
               })
 

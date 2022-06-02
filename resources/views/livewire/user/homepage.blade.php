@@ -31,7 +31,7 @@
                                     <div class="col-md-1"></div>
                                     <div class="col-md-7">
                                         <p class="mt-4">
-                                            {{ $article->article }}
+                                            {!! $article->article !!}
                                         </p>
                                     </div>
                                 </div>

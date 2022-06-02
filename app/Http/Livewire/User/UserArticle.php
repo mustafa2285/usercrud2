@@ -28,7 +28,7 @@ class UserArticle extends Component
 
     public $rules = [
         'title' => 'required|min:1',
-        'article' => 'required|min:200',
+        'article' => 'required',
         'image' => 'image|nullable|mimes:jpg,jpeg,png',
         ];
 
