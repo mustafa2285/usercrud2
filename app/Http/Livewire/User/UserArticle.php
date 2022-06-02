@@ -39,9 +39,16 @@ class UserArticle extends Component
         $articles = Article::whereUser_id(Auth::user()->id)->paginate(5);	
         return view('livewire.user.user-article', compact('articles'));
     }
+
+    public function clear()
+    {
+        $this->title = '';
+        $this->article = '';
+    }
+
     
      public function newArticle(){
-         $this->validate();       
+        $this->validate();       
 
         $new = new Article();
         $new->user_id = Auth::user()->id;
@@ -57,7 +64,7 @@ class UserArticle extends Component
         $new->save();
         $this->reset();
 
-        $this->emit('add-user');
+        $this->emit('add-article');
 
         session()->flash('message', 'Makale Başarıyla Eklendi');
     }
@@ -71,6 +78,7 @@ class UserArticle extends Component
     public function updateArticle(){
         $this->validate();
 
+        if ($this->article_id) {
         $articles = Article::where('id',$this->article_id)->first();
         $articles->title = $this->title;
         $articles->article = $this->article;
@@ -80,9 +88,11 @@ class UserArticle extends Component
         }
         $articles->save();
         $this->reset();
-        $this->emit('update-user');
+        $this->emit('update-article');
 
         session()->flash('message', 'Makale Başarıyla Güncellendi');
+
+        }
     }
 
     public function getArticle2(Article $articles){
@@ -94,7 +104,7 @@ class UserArticle extends Component
         
         $articles = Article::where('id',$this->article_id)->first();
         $articles->delete();
-        $this->emit('delete-user');
+        $this->emit('delete-article');
 
         session()->flash('message', 'Makale Silindi');
         

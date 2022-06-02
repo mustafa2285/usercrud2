@@ -42,6 +42,12 @@ class AdminArticle extends Component
         return view('livewire.admin.admin-article', compact('articles','users'));
     }
 
+    public function cancel()
+    {
+        $this->title = '';
+        $this->article = '';
+    }
+
     public function newArticle(){
          $this->validate();
 

@@ -36,6 +36,13 @@ class UsersIndex extends Component
         return view('livewire.admin.users-index', compact('users'));
     }
 
+    public function cancel()
+    {
+        $this->name = '';
+        $this->email = '';
+        $this->password = '';
+    }
+
     public function newUser(){
         $this->validate(['email' => 'required|min:2|email:rfc,dns|unique:users']);
 

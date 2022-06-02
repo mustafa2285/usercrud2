@@ -46,7 +46,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <a wire:click="getArticle({{$article->id}})" href="#" class="text-primary" data-toggle="modal" data-target="#modal-edit"><i class="fa fa-edit"></i></a>
+                                        <a wire:click="getArticle({{$article->id}})" href="#" class="text-primary" data-toggle="modal" data-target="#modalEdit"><i class="fa fa-edit"></i></a>
                                         ---
                                         <a wire:click="getArticle2({{$article->id}})"  href="#" class="text-danger " data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash-alt"></i></a>
                                     </td>
@@ -64,7 +64,7 @@
       </div>
       <!-- /.container-fluid -->
       <!-- 1.modal -->
-      <div wire:ignore.self class="modal fade" id="modal-default">
+      <div wire:ignore.self class="modal fade" id="modal-default" >
         <div class="modal-dialog">
           <div class="modal-content">
               <form wire:submit.prevent="newArticle">
@@ -77,14 +77,14 @@
                 <div class="modal-body">
                   <div class="mb-3">
                       <label for="IpputTitle" class="form-label">Başlık</label>
-                      <input wire:model="title" type="text" class="form-control" id="IpputTitle">
+                      <input wire:model.defer="title" type="text" class="form-control" id="IpputTitle">
                       @error('title')
                       <div class="text-danger">{{$message}}</div>
                       @enderror
                   </div>
-                  <div class="mb-3">
+                  <div wire:ignore class="mb-3">
                       <label for="IpputArticle" class="form-label">Makale</label>
-                      <textarea wire:model="article" class="form-control" id="IpputArticle"></textarea>
+                      <textarea class="form-control" id="IpputArticle"></textarea>
                       @error('article')
                       <div class="text-danger">{{$message}}</div>
                       @enderror
@@ -108,7 +108,7 @@
         <!-- /.modal-dialog -->
       </div>
        <!-- 2.modal -->
-      <div wire:ignore.self class="modal fade" id="modal-edit">
+      <div wire:ignore.self class="modal fade" id="modalEdit">
         <div class="modal-dialog">
           <div class="modal-content">
               <form wire:submit.prevent="updateArticle">
@@ -121,14 +121,14 @@
                 <div class="modal-body">
                   <div class="mb-3">
                       <label for="IpputTitle" class="form-label">Başlık</label>
-                      <input wire:model="title" type="text" class="form-control" id="IpputTitle">
+                      <input wire:model.defer="title" type="text" class="form-control" id="IpputTitle">
                       @error('title')
                       <div class="text-danger">{{$message}}</div>
                       @enderror
                   </div>
                   <div class="mb-3">
                       <label for="IpputArticle" class="form-label">Makale</label>
-                      <textarea wire:model="article" class="form-control" id="IpputArticle"></textarea>
+                      <textarea wire:model.defer="article" class="form-control" id="IpputArticle"></textarea>
                       @error('article')
                       <div class="text-danger">{{$message}}</div>
                       @enderror
@@ -177,16 +177,45 @@
       </div>
       <!-- /.modal -->
       @section('foot')
+      <script src="https://cdn.ckeditor.com/4.16.1/full/ckeditor.js"></script>
+
+      <script>
+        $(document).ready(function () {
+              const editor = CKEDITOR.replace('IpputArticle');
+              editor.on('change', function(event){
+                  console.log(event.editor.getData())
+                  @this.set('article', event.editor.getData());
+              })
+
+            })
+      </script>
+
+
+
+      {{-- <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
         <script>
-          window.livewire.on('add-user',()=>{
+            ClassicEditor
+            .create(document.querySelector('#IpputArticle'))
+            .then(editor => {
+                editor.model.document.on('add-article:data', () => {
+                    @this.set('IpputArticle', editor.getData());
+                })
+            })
+            .catch(error => {
+                console.error(error);
+            });
+        </script> --}}
+
+        <script>
+          window.livewire.on('add-article',()=>{
             $('#modal-default').modal('hide');
           });
 
-          window.livewire.on('update-user',()=>{
-            $('#modal-edit').modal('hide');
+          window.livewire.on('update-article',()=>{
+            $('#modalEdit').modal('hide');
           });
 
-          window.livewire.on('delete-user',()=>{
+          window.livewire.on('delete-article',()=>{
             $('#modal-delete').modal('hide');
           });
         </script>

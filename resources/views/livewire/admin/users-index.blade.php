@@ -19,7 +19,7 @@
                         <h3 class="card-title">Tüm Kullanıcılar</h3>
                       </div>
                       <div class="col-auto">
-                        <button class="btn btn-outline-success" data-toggle="modal" data-target="#modal-default">Yeni Kullanıcı Ekle</button>
+                        <button wire:click.prevent="cancel()" class="btn btn-outline-success" data-toggle="modal" data-target="#modal-default">Yeni Kullanıcı Ekle</button>
                       </div>
                   </div>
                   <div class="row">
