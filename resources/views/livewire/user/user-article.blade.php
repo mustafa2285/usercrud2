@@ -33,22 +33,22 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($articles as $article)
+                                    @foreach($articles as $a)
                                     <tr>
                                     <td >{{ $loop->iteration }}</td>
-                                    <td>{{ $article->title }}</td>
-                                    <td >{{mb_strimwidth( $article->article , 0, 50, "...")}}</td>
+                                    <td>{{ $a->title }}</td>
+                                    <td >{!! $a->article  !!}</td> {{-- mb_strimwidth(, 0, 50, "...") --}}                                   
                                     <td>
-                                        @if($article->image )
-                                            <a href="{{ asset(\Illuminate\Support\Facades\Storage::url($article->image)) }}" target="_blank">
-                                              <img src="{{ asset(\Illuminate\Support\Facades\Storage::url($article->image)) }}" class="w-50 rounded-pill">
+                                        @if($a->image )
+                                            <a href="{{ asset(\Illuminate\Support\Facades\Storage::url($a->image)) }}" target="_blank">
+                                              <img src="{{ asset(\Illuminate\Support\Facades\Storage::url($a->image)) }}" class="w-50 rounded-pill">
                                             </a>
                                         @endif
                                     </td>
                                     <td>
-                                        <a wire:click="getArticle({{$article->id}})" href="#" class="text-primary" data-toggle="modal" data-target="#modalEdit"><i class="fa fa-edit"></i></a>
+                                        <a wire:click="getArticle({{$a->id}})" href="#" class="text-primary" data-toggle="modal" data-target="#modalEdit"><i class="fa fa-edit"></i></a>
                                         ---
-                                        <a wire:click="getArticle2({{$article->id}})"  href="#" class="text-danger " data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash-alt"></i></a>
+                                        <a wire:click="getArticle2({{$a->id}})"  href="#" class="text-danger " data-toggle="modal" data-target="#modal-delete"><i class="fas fa-trash-alt"></i></a>
                                     </td>
                                     </tr>
                                     @endforeach
@@ -82,9 +82,14 @@
                       <div class="text-danger">{{$message}}</div>
                       @enderror
                   </div>
-                  <div wire:ignore class="mb-3">
+                  <div class="mb-3">
                       <label for="IpputArticle" class="form-label">Makale</label>
-                      <textarea class="form-control" id="IpputArticle"></textarea>
+                      <div >
+                        
+                        <x-text-editor class="form-control" wire:model.lazy="article"/>
+                        {{-- <textarea wire:model.defer="article" class="form-control" id="IpputArticle"></textarea> --}}
+                      </div>
+                      
                       @error('article')
                       <div class="text-danger">{{$message}}</div>
                       @enderror
@@ -126,9 +131,8 @@
                       <div class="text-danger">{{$message}}</div>
                       @enderror
                   </div>
-                  <div wire:ignore class="mb-3">
-                      <label for="IpputArticleUpdate" class="form-label">Makale</label>
-                      <textarea class="form-control" id="IpputArticleUpdate"></textarea>
+                  <div class="mb-3">
+                        <x-text-editor class="form-control" wire:model.lazy="article"/>
                       @error('article')
                       <div class="text-danger">{{$message}}</div>
                       @enderror
@@ -143,7 +147,7 @@
                   </div>
                   <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
-                    <button type="submit" class="btn btn-success" id="m">Makale Güncelle</button>
+                    <button type="submit" class="btn btn-success">Makale Güncelle</button>
                   </div>
               </form>
           </div>
@@ -177,45 +181,55 @@
       </div>
       <!-- /.modal -->
       @section('foot')
-      <script src="https://cdn.ckeditor.com/4.16.1/basic/ckeditor.js"></script>
+
+      {{-- <script>
+        $('#IpputArticle').summernote({
+          placeholder: 'Makale Giriniz.',
+          height: 100,
+          toolbar: [
+              ['style', ['style']],
+              ['font', ['bold', 'underline', 'clear']],
+              ['color', ['color']],
+              ['para', ['ul', 'ol', 'paragraph']],
+              ['table', ['table']],
+              ['insert', ['link', 'picture', 'video']],
+              ['view', ['fullscreen', 'codeview', 'help']]
+          ],
+          callbacks: {
+            onChange: function(contents, $editable) {
+              @this.set('article', contents);
+            }
+          }
+        });
+
+          
+      </script> 
 
       <script>
-        $(document).ready(function () {
-              const editor = CKEDITOR.replace('IpputArticle');
-              editor.on('change', function(event){
-                  console.log(event.editor.getData())
-                  @this.set('article', event.editor.getData());
-              })
-
-            })
-        $(document).ready(function () {
-              const editor = CKEDITOR.replace('IpputArticleUpdate');
-              editor.on('change', function(event){
-                  console.log(event.editor.getData())
-                  @this.get('article', event.editor.getData());
-                  @this.set('article', event.editor.getData());
-              })
-
-            })
-      </script>
-
-
-
-      {{-- <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
-        <script>
-            ClassicEditor
-            .create(document.querySelector('#IpputArticle'))
-            .then(editor => {
-                editor.model.document.on('add-article:data', () => {
-                    @this.set('IpputArticle', editor.getData());
-                })
-            })
-            .catch(error => {
-                console.error(error);
+          $(function(){
+            $('#IpputArticleUpdate').summernote({
+              placeholder: 'Makale Giriniz.',
+              height: 100,
+              toolbar: [
+                  ['style', ['style']],
+                  ['font', ['bold', 'underline', 'clear']],
+                  ['color', ['color']],
+                  ['para', ['ul', 'ol', 'paragraph']],
+                  ['table', ['table']],
+                  ['insert', ['link', 'picture', 'video']],
+                  ['view', ['fullscreen', 'codeview', 'help']]
+              ],
+              callbacks: {
+                onChange: function(contents, $editable) {
+                  @this.set('article', contents);
+                }
+              }
             });
-        </script> --}}
+          });
+      </script> --}}
 
         <script>
+          
           window.livewire.on('add-article',()=>{
             $('#modal-default').modal('hide');
           });

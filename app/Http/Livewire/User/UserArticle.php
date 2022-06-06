@@ -24,6 +24,15 @@ class UserArticle extends Component
     public $article;
     public $image;
 
+    // public function mount($id)
+    // {
+    //     $articles = Article::where('id',$id)->first();
+
+    //     $this->title = $articles->title;
+    //     $this->article = $articles->article;
+    //     $this->article_id = $articles->id;
+    // }
+
 
 
     public $rules = [
@@ -60,7 +69,7 @@ class UserArticle extends Component
             $new->image = $name;
         }
         
-
+        // dd($new->article);
         $new->save();
         $this->reset();
 
@@ -69,7 +78,10 @@ class UserArticle extends Component
         session()->flash('message', 'Makale Başarıyla Eklendi');
     }
 
-    public function getArticle(Article $articles){
+    public function getArticle($id){
+
+        $articles = Article::where('id',$id)->first();
+
         $this->title = $articles->title;
         $this->article = $articles->article;
         $this->article_id = $articles->id;

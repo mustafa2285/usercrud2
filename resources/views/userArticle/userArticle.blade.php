@@ -13,7 +13,12 @@
   <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
-   @livewireStyles
+  <!-- summernote -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+  
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+  @livewireStyles
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -33,6 +38,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
+
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
@@ -40,6 +46,57 @@
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 <!-- alpinejs -->
 <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<!-- summernote -->
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+  window.Size = Quill.import('attributors/style/size');
+window.Size.whitelist = ['10px', '12px', '14px', '16px', '18px', '20px', '24px'];
+Quill.register(window.Size, true);
+</script>
+  <script>
+
+
+var toolbarOptions = [
+        ['bold', 'italic', 'underline', 'strike'],
+        ['blockquote', 'code-block'],
+        [{
+            'header': 1
+        }, {
+            'header': 2
+        }],
+        [{
+            'list': 'ordered'
+        }, {
+            'list': 'bullet'
+        }],
+        [{
+            'indent': '-1'
+        }, {
+            'indent': '+1'
+        }],
+        [{
+            'size': Size.whitelist
+        }],
+        [{
+            'header': [1, 2, 3, 4, 5, 6, false]
+        }],
+        [{
+            'color': []
+        }, {
+            'background': []
+        }],
+        [{
+            'font': []
+        }], // Here, how do I specify custom font families??
+        [{
+            'align': []
+        }],
+    ];
+
+
+  
+</script>
 @livewireScripts
 @yield('foot')
 </body>
